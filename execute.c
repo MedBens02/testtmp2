@@ -64,7 +64,12 @@ void _exec(data *d)
 				_which(d);
 				if (access(d->av[0], F_OK) == -1)
 				{
-					perror(d->shell_name);
+					write(STDERR_FILENO, d->shell_name, 5);
+					write(STDERR_FILENO, ": 1: ", 5);
+					write(STDERR_FILENO, d->av[0], _strlen(d->av[0]));
+					write(STDERR_FILENO, ": ", 2);
+					write(STDERR_FILENO, "not found", 9);
+					write(STDERR_FILENO, "\n", 1);
 				}
 				else
 				{

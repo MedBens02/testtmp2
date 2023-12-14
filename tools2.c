@@ -25,6 +25,7 @@ void _perror(const char *str1, char *str2)
 		str2++;
 	}
 	write(STDERR_FILENO, "\n", 1);
+
 }
 
 
