@@ -80,15 +80,15 @@ step_out:
  */
 char *create_new_entry(char *name, char *value)
 {
-	size_t new_len = strlen(name) + strlen(value) + 2;
+	size_t new_len = _strlen(name) + _strlen(value) + 2;
 	char *new_entry = malloc(new_len);
 
 	if (new_entry == NULL)
 		return (NULL);
 
-	strcpy(new_entry, name);
-	strcat(new_entry, "=");
-	strcat(new_entry, value);
+	_strcpy(new_entry, name);
+	_strcat(new_entry, "=");
+	_strcat(new_entry, value);
 
 	return (new_entry);
 }
@@ -120,18 +120,18 @@ char **_new_environ(char *name, char *value)
 	}
 	for (i = 0; environ[i]; i++)
 	{
-		new_environ[i] = malloc(strlen(environ[i]) + 1);
+		new_environ[i] = malloc(_strlen(environ[i]) + 1);
 		if (!new_environ[i])
 		{
 			free_array(new_environ);
 			free(new_entry);
 			return (NULL);
 		}
-		if (strncmp(environ[i], name, strlen(name)) == 0
-		&& environ[i][strlen(name)] == '=')
-			strcpy(new_environ[i], new_entry);
+		if (_strncmp(environ[i], name, _strlen(name)) == 0
+		&& environ[i][_strlen(name)] == '=')
+			_strcpy(new_environ[i], new_entry);
 		else
-			strcpy(new_environ[i], environ[i]);
+			_strcpy(new_environ[i], environ[i]);
 	}
 	if (!_getenv(name))
 	{

@@ -25,26 +25,31 @@ char *_strdup(const char *str)
 }
 
 
-
 /**
- * is_digit - checks if a number is positive
- *
- * @str: arr of strs
- *
- * Return: 1 if positive, otherwise 0
+ * _isnumber - check if a string is a number
+ * @status: string to be checked
+ * Return: void
  */
-
-int is_digit(const char *str)
+int _isnumber(const char *status)
 {
-	int i = 0;
-
-	if (str == NULL || str[0] == '\0')
+	if (status == NULL || status[0] == '\0')
 		return (0);
-	while (str[i] != '\0')
+	while (*status)
 	{
-		if (str[i] < '0' || str[i] > '9')
+		if (!_isdigit(*status))
 			return (0);
-		i++;
+		status++;
 	}
 	return (1);
+}
+
+
+/**
+ * _isdigit - check if charachter is number
+ * @c: charachter
+ * Return: 1 if its a digit 0 otherwise
+ */
+int _isdigit(int c)
+{
+	return (c >= '0' && c <= '9');
 }

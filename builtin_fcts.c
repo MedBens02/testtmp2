@@ -35,7 +35,7 @@ int exec_builtin(data *d)
  */
 void builtin_exit(data *d)
 {
-	const char *errorString = "./hsh: 1: exit: Illegal number: ";
+	char *errorString = "./hsh: 1: exit: Illegal number: ";
 
 	if (d->av[1])
 	{
@@ -43,14 +43,14 @@ void builtin_exit(data *d)
 			d->exit_code = atoi(d->av[1]);
 		else
 		{
-			write(STDERR_FILENO, errorString, strlen(errorString));
-			write(STDERR_FILENO, d->av[1], strlen(d->av[1]));
+			write(STDERR_FILENO, errorString, _strlen(errorString));
+			write(STDERR_FILENO, d->av[1], _strlen(d->av[1]));
 			write(STDERR_FILENO, "\n", 1);
 			d->exit_code = 2;
 		}
 	}
 	free_array(d->av);
-	free(d->cmd);
+	free(d->command);
 	if (d->flag_overwrite_env)
 		free_array(environ);
 	exit(d->exit_code);
@@ -108,9 +108,9 @@ void builtin_unsetenv(data *d)
 		_perror(d->shell_name, "variable not found.");
 		return;
 	}
-	len = strlen(d->av[1]);
+	len = _strlen(d->av[1]);
 	for (i = 0; environ[i]; i++)
-		if (strncmp(environ[i], d->av[1], len) == 0 && environ[i][len] == '=')
+		if (_strncmp(environ[i], d->av[1], len) == 0 && environ[i][len] == '=')
 			for (j = i; environ[j]; j++)
 				environ[j] = environ[j + 1];
 }

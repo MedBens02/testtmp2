@@ -75,7 +75,7 @@ int _which(data *d);
 int _setenv(data *d, char *name, char *value);
 
 /* string_manip.c */
-unsigned int _strlen(char *str);
+unsigned int _strlen(char *s);
 int _strcmp(const char *s1, const char *s2);
 int _strncmp(const char *s1, const char *s2, int n);
 char *_strcpy(char *dest, const char *src);
@@ -83,8 +83,9 @@ char *_strcat(char *dest, const char *src);
 
 
 /* string_manip2.c */
-char *_strdup(const char *str);
-int is_digit(const char *str)
+char *_strdup(const char *s);
+int _isnumber(const char *str);
+int _isdigit(int c);
 
 /* _getline.c */
 #define READ_BUF_SIZE 1024
